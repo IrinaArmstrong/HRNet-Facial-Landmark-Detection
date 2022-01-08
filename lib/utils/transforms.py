@@ -175,7 +175,8 @@ def crop(img, center, scale, output_size, rot=0):
             return torch.zeros(output_size[0], output_size[1], img.shape[2]) \
                         if len(img.shape) > 2 else torch.zeros(output_size[0], output_size[1])
         else:
-            img = np.array(Image.fromarray(img).resize(size=[new_ht, new_wd]))  # (0-1)-->(0-255)
+            # Image.fromarray((img * 255).astype(np.uint8))
+            img = np.array(Image.fromarray((img * 255).astype(np.uint8)).resize(size=[new_ht, new_wd]))  # (0-1)-->(0-255)
             # imresize is deprecated! imresize is deprecated in SciPy 1.0.0,
             # and will be removed in 1.3.0.
             # Use Pillow instead: numpy.array(Image.fromarray(arr).resize()).
